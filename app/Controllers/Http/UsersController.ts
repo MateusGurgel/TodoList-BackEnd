@@ -7,8 +7,7 @@ export default class UsersController {
     return user
   }
 
-  public async store({request}: HttpContextContract) {
-
+  public async store({ request }: HttpContextContract) {
     const credentials = request.only(['username', 'email', 'password'])
 
     const user = await User.create({
@@ -21,15 +20,9 @@ export default class UsersController {
     return 'ok'
   }
 
-  public async show({}: HttpContextContract) {
+  public async show({}: HttpContextContract) {}
 
-  }
+  public async update({}: HttpContextContract) {}
 
-  public async update({}: HttpContextContract) {
-
-  }
-
-  public async destroy({}: HttpContextContract) {
-
-  }
+  public async destroy({}: HttpContextContract) {}
 }
