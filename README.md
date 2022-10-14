@@ -2,7 +2,7 @@
 
 Free open-source todo list web site
 
-[![License](https://img.shields.io/github/license/danielkrupinski/Osiris.svg?style=plastic)](LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
 
 # Getting started
 
