@@ -1,18 +1,22 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
-
-//TODO: Check if the data exists
-//TODO: Check if the data is valid
-//TODO: Check if the sender is auth
+import CreateUser from 'App/Validators/CreateUserValidator'
 
 export default class UsersController {
   public async index({}: HttpContextContract) {
-    const user = await User.all()
-    return user
+    const users = await User.all()
+    return users
   }
 
-  public async store({ request }: HttpContextContract) {
-    const credentials = request.only(['username', 'email', 'password'])
+  public async show({ request, response }: HttpContextContract) {
+    const userID = request.param('id')
+    const user = await User.findOrFail(userID)
+
+    return response.status(200).send(user)
+  }
+
+  public async store({ request, response }: HttpContextContract) {
+    const credentials = await request.validate(CreateUser)
 
     const user = await User.create({
       username: credentials.username,
@@ -20,31 +24,25 @@ export default class UsersController {
       password: credentials.password,
     })
 
-    console.log(user.$isPersisted)
-    return 'ok'
+    return response.status(200).send(user)
   }
 
-  public async show({ request }: HttpContextContract) {
-    const userID = request.param('id')
-    const user = await User.findOrFail(userID)
+  public async update({ auth, request, response }: HttpContextContract) {
+    await auth.use('api').authenticate()
 
-    return user
-  }
-
-  public async update({ request }: HttpContextContract) {
-    const userID = request.param('id')
-    const credentials = request.only(['username', 'email', 'password'])
-    const user = await User.findOrFail(userID)
+    const credentials = await request.validate(CreateUser)
+    const user = await User.findOrFail(auth.user?.id)
     await user.merge(credentials).save()
-    return user
+
+    return response.status(200).send(user)
   }
 
-  public async destroy({ request }: HttpContextContract) {
-    const userID = request.param('id')
-    const user = await User.findOrFail(userID)
+  public async destroy({ auth, response }: HttpContextContract) {
+    await auth.use('api').authenticate()
 
+    const user = await User.findOrFail(auth.use('api').user?.id)
     await user.delete()
 
-    return 'userDeleted'
+    return response.status(200)
   }
 }

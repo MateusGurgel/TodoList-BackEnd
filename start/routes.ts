@@ -20,8 +20,12 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async () => {
-  return { hello: 'world' }
-})
+Route.get('users', 'UsersController.index')
+Route.post('users', 'UsersController.store')
+Route.put('users', 'UsersController.update')
+Route.delete('users', 'UsersController.destroy')
+Route.get('users/:id', 'UsersController.show')
 
-Route.resource('users', 'UsersController').apiOnly()
+Route.post('auth', 'AuthenticationController.index')
+
+Route.get('dashboard', 'DashBoardController.index')
