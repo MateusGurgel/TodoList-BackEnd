@@ -1,6 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
 import CreateUser from 'App/Validators/CreateUserValidator'
+import UpdateUserValidator from 'App/Validators/UpdateUserValidator'
 
 export default class UsersController {
   public async index({}: HttpContextContract) {
@@ -30,7 +31,7 @@ export default class UsersController {
   public async update({ auth, request, response }: HttpContextContract) {
     await auth.use('api').authenticate()
 
-    const credentials = await request.validate(CreateUser)
+    const credentials = await request.validate(UpdateUserValidator)
     const user = await User.findOrFail(auth.user?.id)
     await user.merge(credentials).save()
 
