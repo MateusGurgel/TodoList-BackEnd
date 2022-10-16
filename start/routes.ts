@@ -26,5 +26,7 @@ Route.patch('users', 'UsersController.update')
 Route.delete('users', 'UsersController.destroy')
 Route.get('users/:id', 'UsersController.show')
 
-Route.post('auth', 'AuthenticationController.index')
-Route.get('dashboard', 'DashBoardController.index')
+Route.resource('tasks', 'TasksController')
+
+Route.post('login', 'AuthenticationController.login')
+Route.post('logout', 'AuthenticationController.logout')

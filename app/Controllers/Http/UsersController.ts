@@ -4,16 +4,19 @@ import CreateUser from 'App/Validators/CreateUserValidator'
 import UpdateUserValidator from 'App/Validators/UpdateUserValidator'
 
 export default class UsersController {
+
+  //only for debug reasons
   public async index({}: HttpContextContract) {
     const users = await User.all()
     return users
   }
 
+  //only for debug reasons
   public async show({ request, response }: HttpContextContract) {
-    const userID = request.param('id')
-    const user = await User.findOrFail(userID)
+    const user_id = request.param('id')
+    const user = await User.findOrFail(user_id)
 
-    return response.status(200).send(user)
+    return response.ok(user)
   }
 
   public async store({ request, response }: HttpContextContract) {
@@ -25,7 +28,7 @@ export default class UsersController {
       password: credentials.password,
     })
 
-    return response.status(200).send(user)
+    return response.ok(user)
   }
 
   public async update({ auth, request, response }: HttpContextContract) {
@@ -35,15 +38,15 @@ export default class UsersController {
     const user = await User.findOrFail(auth.user?.id)
     await user.merge(credentials).save()
 
-    return response.status(200).send(user)
+    return response.ok(user)
   }
 
-  public async destroy({ auth, response }: HttpContextContract) {
+  public async destroy({ auth }: HttpContextContract) {
     await auth.use('api').authenticate()
 
     const user = await User.findOrFail(auth.use('api').user?.id)
     await user.delete()
 
-    return response.status(200)
+    return
   }
 }
