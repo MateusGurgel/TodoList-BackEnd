@@ -4,7 +4,6 @@ Free open-source todo list web site
 
 [![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
 [![License](https://img.shields.io/badge/language-JavaScript-informational)](https://en.wikipedia.org/wiki/JavaScript)
-[![License](https://img.shields.io/badge/-RESTful-success)](https://pt.wikipedia.org/wiki/REST)
 
 # Getting started
 
