@@ -1,6 +1,6 @@
 # To-do List BackEnd
 
-Free open-source todo list web site
+Free open-source todo list back-end
 
 [![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
 [![Language](https://img.shields.io/badge/language-TypeScript-informational)](https://www.typescriptlang.org/)
