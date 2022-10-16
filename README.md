@@ -3,7 +3,7 @@
 Free open-source todo list web site
 
 [![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
-[(https://img.shields.io/badge/language-JavaScript-informational)](https://en.wikipedia.org/wiki/JavaScript)
+[[P](https://img.shields.io/badge/language-JavaScript-informational)](https://en.wikipedia.org/wiki/JavaScript)
 [(https://img.shields.io/badge/Framework-AdonisJs-informational)](https://adonisjs.com/)
 
 # Getting started
