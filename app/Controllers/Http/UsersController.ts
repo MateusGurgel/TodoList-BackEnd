@@ -4,7 +4,6 @@ import CreateUser from 'App/Validators/CreateUserValidator'
 import UpdateUserValidator from 'App/Validators/UpdateUserValidator'
 
 export default class UsersController {
-
   //only for debug reasons
   public async index({}: HttpContextContract) {
     const users = await User.all()
