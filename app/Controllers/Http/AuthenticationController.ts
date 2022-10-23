@@ -9,10 +9,10 @@ export default class Authentication {
       const token = await auth.use('api').attempt(credentials.email, credentials.password, {
         expiresIn: '7 days',
       })
-      
+
       return response.ok(token)
     } catch (error) {
-      return response.unauthorized({message: "Invalid credentials"})
+      return response.unauthorized({ message: 'Invalid credentials' })
     }
   }
 

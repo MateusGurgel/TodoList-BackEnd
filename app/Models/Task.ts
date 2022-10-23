@@ -5,7 +5,7 @@ export default class Task extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
-  @column({})
+  @column()
   public creator_id: number
 
   @column()

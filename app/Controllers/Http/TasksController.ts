@@ -14,6 +14,7 @@ export default class TasksController {
 
     const tasks = await Task.query().where('creator_id', '=', user_id)
 
+    console.log(tasks)
     return response.ok(tasks)
   }
 
