@@ -14,11 +14,10 @@ export default class TasksController {
 
     let tasks = await Task.query().where('creator_id', '=', user_id)
 
-    tasks.map((task)=> {
+    tasks.map((task) => {
       if (task.description !== null && task.description.length > 29)
-        task.description = task.description.slice(0, 26) + "..."
+        task.description = task.description.slice(0, 26) + '...'
     })
-    
 
     return response.ok(tasks)
   }
