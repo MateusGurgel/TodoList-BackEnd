@@ -12,9 +12,14 @@ export default class TasksController {
       return response.unauthorized({ message: 'user undefined' })
     }
 
-    const tasks = await Task.query().where('creator_id', '=', user_id)
+    let tasks = await Task.query().where('creator_id', '=', user_id)
 
-    console.log(tasks)
+    tasks.map((task)=> {
+      if (task.description !== null && task.description.length > 29)
+        task.description = task.description.slice(0, 26) + "..."
+    })
+    
+
     return response.ok(tasks)
   }
 
