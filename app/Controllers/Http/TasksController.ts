@@ -28,7 +28,7 @@ export default class TasksController {
       creator_id: user_id,
       title: taskAttributes.title,
       description: taskAttributes.description,
-      priority_flag: taskAttributes.priority_flag,
+      priority: taskAttributes.priority,
     })
 
     return response.ok(task)

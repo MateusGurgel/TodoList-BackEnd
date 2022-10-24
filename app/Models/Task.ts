@@ -15,7 +15,7 @@ export default class Task extends BaseModel {
   public description: string
 
   @column()
-  public priority_flag: string[]
+  public priority: number[]
 
   @column()
   public done: boolean

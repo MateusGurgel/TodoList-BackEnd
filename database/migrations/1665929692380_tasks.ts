@@ -10,7 +10,7 @@ export default class extends BaseSchema {
 
       table.string('title').notNullable()
       table.string('description').nullable()
-      table.enu('priority_flag', ['Green', 'Yellow', 'Red']).defaultTo('Green')
+      table.enu('priority', [1, 2, 3]).defaultTo(1)
       table.boolean('done').defaultTo(false).notNullable()
 
       table.timestamp('created_at', { useTz: true }).notNullable()

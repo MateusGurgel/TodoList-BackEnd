@@ -26,7 +26,7 @@ export default class TaskValidator {
   public schema = schema.create({
     title: schema.string([rules.minLength(1), rules.maxLength(50)]),
     description: schema.string.optional([rules.minLength(1), rules.maxLength(1000)]),
-    priority_flag: schema.enumSet(['Green', 'Yellow', 'Red']),
+    priority: schema.enumSet([1, 2, 3]),
   })
 
   /**
