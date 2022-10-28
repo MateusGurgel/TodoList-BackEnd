@@ -1,6 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Task from 'App/Models/Task'
-import TaskValidator from 'App/Validators/TaskValidator'
+import TaskValidator from 'App/Validators/TaskUpdateValidator'
 
 export default class TasksController {
   public async index({ auth, response }: HttpContextContract) {
