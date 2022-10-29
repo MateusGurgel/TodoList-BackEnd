@@ -1,6 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Task from 'App/Models/Task'
-import TaskValidator from 'App/Validators/TaskUpdateValidator'
+import CreateTaskValidator from 'App/Validators/CreateTaskValidator'
+import UpdateTaskValidator from 'App/Validators/UpdateTaskValidator'
 
 export default class TasksController {
   public async index({ auth, response }: HttpContextContract) {
@@ -9,7 +10,13 @@ export default class TasksController {
     const userId = auth.user?.id
 
     if (userId === undefined) {
-      return response.unauthorized({ message: 'user undefined' })
+      return response.unauthorized({
+        errors: [
+          {
+            message: 'E_INVALID_API_TOKEN: Invalid API token',
+          },
+        ],
+      })
     }
 
     let tasks = await Task.query().where('creator_id', '=', userId)
@@ -25,7 +32,7 @@ export default class TasksController {
   public async store({ auth, request, response }: HttpContextContract) {
     await auth.use('api').authenticate()
 
-    const taskAttributes = await request.validate(TaskValidator)
+    const taskAttributes = await request.validate(CreateTaskValidator)
     const userId = auth.user?.id
 
     const task = await Task.create({
@@ -34,7 +41,7 @@ export default class TasksController {
       description: taskAttributes.description,
       priority: taskAttributes.priority,
     })
-
+    
     return response.ok(task)
   }
 
@@ -43,10 +50,16 @@ export default class TasksController {
 
     const userId = auth.user?.id
     const task_id = request.param('id')
-    const task = await Task.findOrFail(task_id)
+    const task = await Task.find(task_id)
 
-    if (task.creator_id !== userId) {
-      return response.forbidden({ error: 'Unauthorized' })
+    if (task === null || userId !== task.creator_id){
+      return response.forbidden({
+        errors: [
+          {
+            message: 'E_INVALID_API_TOKEN: Invalid API token',
+          },
+        ],
+      })
     }
 
     return task
@@ -60,10 +73,16 @@ export default class TasksController {
     const task = await Task.findOrFail(task_id)
 
     if (task.creator_id !== userId) {
-      return response.forbidden({ message: 'Unauthorized' })
+      return response.forbidden({
+        errors: [
+          {
+            message: 'E_INVALID_API_TOKEN: Invalid API token',
+          },
+        ],
+      })
     }
 
-    const taskAttributes = await request.validate(TaskValidator)
+    const taskAttributes = await request.validate(UpdateTaskValidator)
     await task.merge(taskAttributes).save()
 
     return task
@@ -77,7 +96,13 @@ export default class TasksController {
     const task = await Task.findOrFail(task_id)
 
     if (task.creator_id !== userId) {
-      return response.forbidden({ message: 'Unauthorized' })
+      return response.forbidden({
+        errors: [
+          {
+            message: 'E_INVALID_API_TOKEN: Invalid API token',
+          },
+        ],
+      })
     }
 
     task.delete()
