@@ -24,7 +24,7 @@ export default class LoginValidator {
    *    ```
    */
   public schema = schema.create({
-    password: schema.string([rules.minLength(6) , rules.maxLength(30)]),
+    password: schema.string([rules.minLength(6), rules.maxLength(30)]),
     email: schema.string([
       rules.email(),
       rules.normalizeEmail({

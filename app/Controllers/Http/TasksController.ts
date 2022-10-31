@@ -41,7 +41,7 @@ export default class TasksController {
       description: taskAttributes.description,
       priority: taskAttributes.priority,
     })
-    
+
     return response.ok(task)
   }
 
@@ -52,7 +52,7 @@ export default class TasksController {
     const task_id = request.param('id')
     const task = await Task.find(task_id)
 
-    if (task === null || userId !== task.creator_id){
+    if (task === null || userId !== task.creator_id) {
       return response.forbidden({
         errors: [
           {
