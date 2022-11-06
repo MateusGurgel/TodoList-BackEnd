@@ -22,8 +22,13 @@ export default class TasksController {
     let tasks = await Task.query().where('creator_id', '=', userId)
 
     tasks.map((task) => {
-      if (task.description !== null && task.description.length > 29)
+      if (task.description !== null && task.description.length > 29) {
         task.description = task.description.slice(0, 26) + '...'
+      }
+
+      if (task.title.length > 18) {
+        task.title = task.title.slice(0, 15) + '...'
+      }
     })
 
     return response.ok(tasks)
@@ -49,8 +54,8 @@ export default class TasksController {
     await auth.use('api').authenticate()
 
     const userId = auth.user?.id
-    const task_id = request.param('id')
-    const task = await Task.find(task_id)
+    const taskId = request.param('id')
+    const task = await Task.find(taskId)
 
     if (task === null || userId !== task.creator_id) {
       return response.forbidden({
@@ -69,8 +74,8 @@ export default class TasksController {
     await auth.use('api').authenticate()
 
     const userId = auth.user?.id
-    const task_id = request.param('id')
-    const task = await Task.findOrFail(task_id)
+    const taskId = request.param('id')
+    const task = await Task.findOrFail(taskId)
 
     if (task.creator_id !== userId) {
       return response.forbidden({
@@ -92,8 +97,8 @@ export default class TasksController {
     await auth.use('api').authenticate()
 
     const userId = auth.user?.id
-    const task_id = request.param('id')
-    const task = await Task.findOrFail(task_id)
+    const taskId = request.param('id')
+    const task = await Task.findOrFail(taskId)
 
     if (task.creator_id !== userId) {
       return response.forbidden({

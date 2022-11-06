@@ -10,8 +10,8 @@ export default class UsersController {
   }
 
   public async show({ request, response }: HttpContextContract) {
-    const user_id = request.param('id')
-    const user = await User.findOrFail(user_id)
+    const userId = request.param('id')
+    const user = await User.findOrFail(userId)
 
     return response.ok(user)
   }
