@@ -12,7 +12,13 @@ export default class Authentication {
 
       return response.ok(token)
     } catch (error) {
-      return response.unauthorized({ message: 'Invalid credentials' })
+      return response.forbidden({
+        errors: [
+          {
+            message: 'Invalid credentials',
+          },
+        ],
+      })
     }
   }
 

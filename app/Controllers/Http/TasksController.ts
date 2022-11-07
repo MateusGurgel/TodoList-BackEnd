@@ -13,7 +13,7 @@ export default class TasksController {
       return response.unauthorized({
         errors: [
           {
-            message: 'E_INVALID_API_TOKEN: Invalid API token',
+            message: 'Invalid API token',
           },
         ],
       })
@@ -61,7 +61,7 @@ export default class TasksController {
       return response.forbidden({
         errors: [
           {
-            message: 'E_INVALID_API_TOKEN: Invalid API token',
+            message: 'Invalid API token',
           },
         ],
       })
@@ -81,7 +81,7 @@ export default class TasksController {
       return response.forbidden({
         errors: [
           {
-            message: 'E_INVALID_API_TOKEN: Invalid API token',
+            message: 'Invalid API token',
           },
         ],
       })
@@ -104,7 +104,7 @@ export default class TasksController {
       return response.forbidden({
         errors: [
           {
-            message: 'E_INVALID_API_TOKEN: Invalid API token',
+            message: 'Invalid API token',
           },
         ],
       })
