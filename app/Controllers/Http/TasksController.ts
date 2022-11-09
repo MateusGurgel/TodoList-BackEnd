@@ -57,7 +57,17 @@ export default class TasksController {
     const taskId = request.param('id')
     const task = await Task.find(taskId)
 
-    if (task === null || userId !== task.creator_id) {
+    if (task === null){
+      return response.notFound({
+        errors: [
+          {
+            message: 'Task not found',
+          },
+        ],
+      })
+    }
+
+    if (userId !== task.creator_id) {
       return response.forbidden({
         errors: [
           {
